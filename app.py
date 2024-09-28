@@ -1,29 +1,7 @@
 import streamlit as st
-import subprocess
-import sys
-
-# Ensure required packages are installed
-def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-try:
-    import openai
-except ImportError:
-    install("openai")
-    import openai
-
-try:
-    from PyPDF2 import PdfReader
-except ImportError:
-    install("PyPDF2")
-    from PyPDF2 import PdfReader
-
-try:
-    import docx
-except ImportError:
-    install("python-docx")
-    import docx
-
+import openai
+from PyPDF2 import PdfReader
+import docx
 import io
 import os
 import tempfile
