@@ -40,11 +40,11 @@ def chat_with_gpt(message, context=""):
         ]
         
         response = openai.ChatCompletion.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages=messages
         )
         
-        return response.choices[0].message['content']
+        return response['choices'][0]['message']['content']
     except Exception as e:
         return f"An error occurred: {str(e)}"
 
