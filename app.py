@@ -6,7 +6,7 @@ import os
 import tempfile
 
 # Set up OpenAI API key from Streamlit secrets
-openai.api_key = "sk-I3zgNuEXeuCQBPYcoUTnpsdoQU4X0UkU_KWld_aiKMT3BlbkFJk3-JKEyGpDhGsCN39j3jK5qorMqmE8UwYZrUw8S0gA"
+openai.api_key = "sk-svcacct-M2F1ik3Mf_PRoCG20UoDv9uQZw-d4DZxMyCUMF9G4QAvbX2oPMP6ktRRqUMkiUjZUBlT3BlbkFJ5QeDJV_ecxTNa1F3x0xcZL_hX1w01JzBDmvlgyPeSqSWkBv7YzwDePHQUe9k7DPitAA"
 
 
 # Initialize session state
