@@ -1,12 +1,34 @@
 import streamlit as st
-import openai
-from PyPDF2 import PdfReader
-import docx
+import subprocess
+import sys
+
+# Ensure required packages are installed
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+try:
+    import openai
+except ImportError:
+    install("openai")
+    import openai
+
+try:
+    from PyPDF2 import PdfReader
+except ImportError:
+    install("PyPDF2")
+    from PyPDF2 import PdfReader
+
+try:
+    import docx
+except ImportError:
+    install("python-docx")
+    import docx
+
 import io
 import os
 import tempfile
 
-# Set up OpenAI API key
+# Set up OpenAI API key (replace with your key or use st.secrets for better security)
 openai.api_key = "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"
 
 # Initialize session state
@@ -33,17 +55,20 @@ def save_file(file):
         return tmp_file.name
 
 def chat_with_gpt(message, context=""):
-    messages = [
-        {"role": "system", "content": "You are a helpful assistant for a university assignment submission system. You can answer questions about assignments, provide suggestions for improvement, and discuss academic topics."},
-        {"role": "user", "content": f"Context: {context}\n\nUser question: {message}"}
-    ]
-    
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=messages
-    )
-    
-    return response.choices[0].message['content']
+    try:
+        messages = [
+            {"role": "system", "content": "You are a helpful assistant for a university assignment submission system. You can answer questions about assignments, provide suggestions for improvement, and discuss academic topics."},
+            {"role": "user", "content": f"Context: {context}\n\nUser question: {message}"}
+        ]
+        
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=messages
+        )
+        
+        return response.choices[0].message['content']
+    except Exception as e:
+        return f"An error occurred: {str(e)}"
 
 def main():
     st.set_page_config(page_title="Assignment Submission Chatbot", page_icon="📚", layout="wide")
