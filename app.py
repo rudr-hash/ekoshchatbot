@@ -6,7 +6,7 @@ import io
 import os
 import tempfile
 
-# Set up OpenAI API key (replace with your key or use st.secrets for better security)
+# Set up OpenAI API key (replace with your own key or use st.secrets for better security)
 openai.api_key = "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"
 
 # Initialize session state
