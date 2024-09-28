@@ -7,7 +7,7 @@ import os
 import tempfile
 
 # Set up OpenAI API key (replace with your own key or use st.secrets for better security)
-openai.api_key = "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"
+openai.api_key = "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"
 
 # Initialize session state
 if "messages" not in st.session_state:
