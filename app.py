@@ -2,12 +2,15 @@ import streamlit as st
 import openai
 from PyPDF2 import PdfReader
 import docx
-import io
 import os
 import tempfile
 
-# Set up OpenAI API key (replace with your own key or use st.secrets for better security)
-openai.api_key = st.secrets["openai"]["api_key"]
+# Set up OpenAI API key from Streamlit secrets
+try:
+    openai.api_key = st.secrets["openai"]["api_key"]
+except KeyError:
+    st.error("API key not found. Please check your secrets.toml file.")
+    st.stop()
 
 # Initialize session state
 if "messages" not in st.session_state:
@@ -35,7 +38,7 @@ def save_file(file):
 def chat_with_gpt(message, context=""):
     try:
         messages = [
-            {"role": "system", "content": "You are a helpful assistant for a university assignment submission system. You can answer questions about assignments, provide suggestions for improvement, and discuss academic topics."},
+            {"role": "system", "content": "You are a helpful assistant for a university assignment submission system."},
             {"role": "user", "content": f"Context: {context}\n\nUser question: {message}"}
         ]
         
